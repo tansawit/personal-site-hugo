@@ -1,0 +1,44 @@
+# Hugo default output directory
+/public/
+
+# Hugo generated files
+/resources/_gen/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# IDE/Editor folders
+.vscode/
+.idea/
+
+# Hugo's cache directory
+.hugo_build.lock
+
+# Node modules (if using npm for any reason)
+node_modules/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+
+# Executable files
+*.exe
+*.out
+*.app
+
+# Dependency directories (remove if not using)
+/vendor/
+/themes/
