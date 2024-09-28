@@ -28,9 +28,9 @@ Most fast bridges are implemented as liquidity pools or vaults between the base 
 1. **single vault for each chain**: One central liquidity pool on each chain (L1 and L2) for a given asset. When a user wants to bridge assets from L2 to L1, they deposit into the L2 vault, and an equivalent amount is released from the L1 vault to the user.
 2. **vault for each L1:L2 pair**: Dedicated vault for each asset pair between L1 and L2. For example, for our example of Optimism and Arbitrum, there would be separate vaults for each L1:Optimism and L1:Arbitrum pair.
 
-When users bridge assets from L2 to the L1 using bridges, the protocol under the hood deposits their bridged assets into the bridge's liquidity pool on the rollup, and subsequently transfers an equivalent amount of the asset from the liquidity pool on the Layer 1 to the user's address on the L1.
+When users bridge assets from L2 to the L1 using bridges, the protocol under the hood deposits their bridged assets into the bridge's liquidity pool on the rollup, and subsequently transfers an equivalent amount of the asset from the liquidity pool on the Layer 1 to the user's address on the L1. And while this design has proven effective so far, it does have some drawbacks, with the main one being liquidity fragmentation.
 
-And while this design has proven effective so far, it does have some drawbacks, with the main one being liquidity fragmentation. In either designs, the asset liquidity (e.g. ETH) needs to be spread across either multiple vaults or multiple chains, reducing overall possible liquidity depth. This leads to less efficient liquidity utilization, lower pool depth, less stable swap prices and higher slippage, and overall suboptimal user experience.
+In both designs, the primary asset (e.g., ETH) must be distributed across multiple liquidity pools on various networks. This results in inefficient liquidity utilization, reduced pool depth, less favorable swap prices, increased slippage, and an overall suboptimal user experience.
 
 ```mermaid
 graph LR
@@ -66,9 +66,8 @@ To solve this problem for Initia and the various Minitia, we have created the Mi
 
 When designing Minitswap, we had 3 main goals:
 
-1. Solve the liquidity fragmentation problem of current fast bridges
+1. Minimize and potentially solve the liquidity fragmentation problem of current fast bridges
 2. Zero waiting period for asset transfers between L1 and L2 in either direction
-3. Minimize risks for liquidity providers
 
 with the overall objective of generally providing users with the best bridging experience throughout the ecosystem.
 
