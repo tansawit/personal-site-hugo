@@ -38,7 +38,3 @@ node_modules/
 *.exe
 *.out
 *.app
-
-# Dependency directories (remove if not using)
-/vendor/
-/themes/
