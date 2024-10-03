@@ -208,7 +208,7 @@ async personalSign(message: string | Uint8Array): Promise<string> {
 }
 ```
 
-However, the signature returned from the wallet can be used, it must be converted. The EVM signature format is incompatible with the Cosmos SDK. The code below shows the conversion process for EVM wallets.
+However, as EVM signature format is incompatible with Cosmos SDK transactions, the signature returned from the wallet must be converted. The code below shows the conversion process.
 
 ```ts
 private async sign(signDoc: StdSignDoc): Promise<StdSignature> {
@@ -220,7 +220,7 @@ private async sign(signDoc: StdSignDoc): Promise<StdSignature> {
 }
 ```
 
-The conversion process for EVM wallets is as follows:
+If we were to visualize the conversion, it would look like this:
 
 ```mermaid
 flowchart LR
@@ -236,7 +236,7 @@ flowchart LR
     style H fill:#9ff,stroke:#333,stroke-width:2px
 ```
 
-And while this signature conversion is similar across all wallet types, the specific steps vary depending on the wallet's default signature format.
+And while this conversion process is similar across all wallet types, the specific steps vary depending on the wallet's default signature format.
 
 ### 4. Transaction Broadcasting
 
