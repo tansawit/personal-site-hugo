@@ -1,30 +1,33 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://tansawit.me'
 languageCode = 'en-us'
 title = 'tansawit'
 theme = 'typo'
 
+# # # Disable tags
+# disableKinds = ['taxonomy']
+
 [taxonomies]
 tag = 'tags'
 
-# Google analytics code
-googleAnalytics = "G-xxxxxxxxx"
-
 [params]
-# Meta description
-description = "A smol blog"
+# Home meta description
+description = "A smol blog."
 
 # Appearance settings
-theme = 'light'
+theme = 'auto'
 colorPalette = 'default'
 hideHeader = false
 
-# Intro on main page, content is markdown
+# Intro on main page, content in markdown
 homeIntroTitle = 'Hi!'
 homeIntroContent = """
 I'm Sawit. Currently, I'm the Head of Integrations at [Initia](https://initia.xyz/), focusing on onboarding new teams and developer into the ecosystem and building developer and user tooling products.
 
-Before that, amongst other things,I was the Founder & CEO of Alles Labs building [Celatone](https://celat.one/) (acq. by [Initia](https://initia.xyz/)) and previously the Integration Lead at [Band Protocol](https://bandprotocol.com/).
+Before that, amongst other things,I was the Founder & CEO of Alles Labs building [Celatone](https://celat.one/) (acquired by [Initia](https://initia.xyz/)) and previously the Integration Lead at [Band Protocol](https://bandprotocol.com/).
 """
+
+
+singleDateFormat = '2 Jan 2006'
 
 # Collection to display on home
 homeCollectionTitle = 'Posts'
@@ -33,12 +36,16 @@ homeCollection = 'posts'
 # Lists parameters
 paginationSize = 100
 listSummaries = true
-listDateFormat = '2 Jan 2006'
+listDateFormat = '02 Jan 2006'
 
 # Breadcrumbs
 breadcrumbs = true
 
+showFooter = true
+# footerContent = """Custom"""
+
 # Social icons
+
 [[params.social]]
 name = "twitter"
 url = "https://twitter.com/tansawit"
@@ -49,7 +56,7 @@ url = "https://github.com/tansawit"
 
 [[params.social]]
 name = "linkedin"
-url = "https://www.linkedin.com/in/tansawit"
+url = "https://www.linkedin.com/in/tansawit/"
 
 # Main menu pages
 [[params.menu]]
@@ -60,17 +67,33 @@ url = "/"
 name = "posts"
 url = "/posts"
 
+# [[params.menu]]
+# name = "tags"
+# url = "/tags"
+
+
 # Syntax highligth on code blocks
 [markup]
 [markup.highlight]
-style = 'github'
+style = 'github-dark'
 
-# Giscus comments
+# Deploy settings
+
+[[deployment.matchers]]
+pattern = "^.+\\.(js|css|svg|ttf|woff2)$"
+cacheControl = "max-age=31536000, no-transform, public"
+gzip = true
+
+[[deployment.matchers]]
+pattern = "^.+\\.(png|jpg|gif|webp)$"
+cacheControl = "max-age=31536000, no-transform, public"
+gzip = false
+
 [params.giscus]
 enable = false
-repo = "user/repo"
-repoid = "repoId"
+repo = "tomfran/blog"
+repoid = "R_kgDOLtSszw"
 category = "General"
-categoryid = "categoryId"
+categoryid = "DIC_kwDOLtSsz84CfLm4"
 mapping = "pathname"
 theme = "preferred_color_scheme"
