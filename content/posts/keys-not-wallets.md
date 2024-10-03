@@ -9,6 +9,7 @@ math: true
 tags: ["blockchain", "initia", "cosmossdk"]
 showTags: false
 hideBackToTop: false
+image: "/images/initia-wallet-widget-og-banner.png"
 ---
 
 When designing the user experience for Initia, one of the key areas of discussion is how users use and interact with their wallets and apps. How do we offer a native, smooth experience for users while ensuring that existing blockchain users don't need to add yet another wallet to their already bloated collection? This article explores our solution: the Initia Wallet Widget.
