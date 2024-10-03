@@ -1,8 +1,8 @@
 ---
 title: "Keys, Not Wallets"
-date: "2024-10-01"
-summary: "Building a universal blockchain wallet adapter." 
-description: "Building a universal blockchain wallet adapter."
+date: "2024-10-03"
+summary: "Building a universal blockchain wallet adapter with Initia Wallet Widget." 
+description: "Building a universal blockchain wallet adapter with Initia Wallet Widget."
 toc: true
 readTime: true
 math: true
@@ -26,7 +26,6 @@ n practice, this fragmentation happens both within and across ecosystems. Howeve
 
 ### Exploring Fragmentation
 
-
 **We as an industry has normalized the idea of having a new wallet for each new ecosystem or tech stack.** And while there are certainly good reasons for this, such as offering a tailored experience for users or adding and supporting specific niche features, a major part is also self-imposed limitations. See, wallets have gone from simply being key management tools to full-fledged applications on its own, with feature offerings such as:
 
 - direct transaction broadcasting through the wallet
@@ -38,6 +37,8 @@ Again this is not necessarily bad! But all of these features differs among chain
 - **EVM**: MetaMask, Rabby, Uniswap, etc.
 - **Cosmos**: Keplr, Cosmostation, Leap, etc.
 - **Solana**: Phantom, Backpack, Solflare etc.
+
+![Web3 Wallet Landscape](/images/initia-wallet-widget-wallet-landscape.png)
 
 Your previously universal private keys are now restricted, imposed, and locked down by its container. For an EVM user wanting to interact with Cosmos with the same key needs to find and install a new wallet, set up their mnemonic, and switch between the two frequently.
 
@@ -69,8 +70,7 @@ Let's say you're a user with an existing wallet wanting to interact with [Initia
 
 When you first click on "Connect Wallet", you'll see a modal prompting you to choose which wallet you want to connect with.
 
-![](/images/initia-wallet-widget-connect-wallet.png)
-
+![Initia Wallet Widget Wallet Options](/images/initia-wallet-widget-connect-wallet.png)
 
 For this example, let's assume you want to use Rabby. You'd select Rabby Wallet from the options, and...that's it. You're connected! On the backend, the Widget is retrieving the necessary account information from the Rabby Wallet (e.g. address, public key, etc.) and creating the necessary states for it. During this, the Widget also uses your hex (0x...) address to derive your `init`-prefixed bech32 address.
 
@@ -78,7 +78,7 @@ Now that you're connected, let's see how interacting with the app and broadcasti
 
 You'd go to the "*Stake*" page, select "*INIT*" as the token, enter "*1*" as the amount, choose your validator, and click "*Confirm*" and "*Approve*" on the modal. At this point, you'll see a Rabby pop-up with the transaction.
 
-![](/images/initia-wallet-widget-sign-transaction.png)
+![Signing Transaction Using Rabby](/images/initia-wallet-widget-sign-transaction.png)
 
 But if you look closely, you might notice notice two things:
 
@@ -210,7 +210,7 @@ async function setupSigner(
 }
 ```
 
-### Transaction Preparation, Signing, and Broadcasting
+### Transaction Handling
 
 Once the signer is set up, the Widget proceeds to prepare, sign, and broadcast the transaction. This process is managed by the [`signAndBroadcastTx`](https://github.com/initia-labs/wallet/blob/develop/widget/src/signers/base/BaseSigner.ts#L105) function:
 
@@ -226,7 +226,7 @@ async signAndBroadcastTx(txBodyValue: TxBodyValue, fee: StdFee, mode: "sync" | "
 
 This function orchestrates four main steps:
 
-#### Transaction Signing:
+#### Transaction Signing
 
 The [`signTx`](https://github.com/initia-labs/wallet/blob/develop/widget/src/signers/base/BaseSigner.ts#L62) function creates the Cosmos SDK transaction data and forwards it to the wallet for user signing.
 
