@@ -1,8 +1,8 @@
 ---
 title: "Keys, Not Wallets"
 date: "2024-10-03"
-summary: "Building a universal blockchain wallet adapter with Initia Wallet Widget."
-description: "Building a universal blockchain wallet adapter with Initia Wallet Widget."
+summary: "Building a universal blockchain wallet adapter with the Initia Wallet Widget."
+description: "Building a universal blockchain wallet adapter with the Initia Wallet Widget."
 toc: true
 readTime: true
 showTags: false
