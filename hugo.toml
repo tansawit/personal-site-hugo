@@ -14,7 +14,7 @@ googleAnalytics = "G-xxxxxxxxx"
 description = "A smol blog"
 
 # Appearance settings
-theme = 'auto'
+theme = 'light'
 colorPalette = 'default'
 hideHeader = false
 
@@ -60,14 +60,10 @@ url = "/"
 name = "posts"
 url = "/posts"
 
-[[params.menu]]
-name = "about"
-url = "/about"
-
 # Syntax highligth on code blocks
 [markup]
 [markup.highlight]
-style = 'algol'
+style = 'github'
 
 # Giscus comments
 [params.giscus]
