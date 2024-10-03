@@ -41,10 +41,10 @@ Your previously universal private keys are now restricted, imposed, and locked d
 
 This results in a suboptimal UX. But further than that, the need for multiple wallets also increases the potential risks for the user. They need to worry about using the correct wallet extension link, inputting the private key correctly and securely, and more. All this needs to change. And, with Initia, we have the chance to do just that.
 
-When building the wallet experience for Initia, our thesis is simple; **"keys, not wallets."** In short:
+When building the wallet experience for Initia, our approach is simple; **"keys, not wallets."** In short:
 
-1. treat wallets as what they originally meant to be, as signing devices
-2. make wallets universal again.
+1. **wallets as key managers**: treat wallets as what they originally meant to be, as signing devices
+2. **make wallets universal (again)**: allow users to use their existing wallets to interact with Initia
 
 To achieve this, we've designed the [Initia Wallet Widget](https://github.com/initia-labs/wallet).
 
