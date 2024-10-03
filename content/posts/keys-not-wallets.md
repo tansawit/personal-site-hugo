@@ -124,47 +124,25 @@ sequenceDiagram
  Website/App->>User: Display transaction result
 ```
 
-For those looking for a TL;DR, the specific steps are:
+For those looking for a TL;DR, the Widget:
 
-- receiving the transaction data from the application
-- passing the transaction data to the connected wallet for signing
-- converting the EVM signature to the Cosmos SDK compatible format
-- broadcasting the transaction to the network
-- returning the transaction results to the application
+- receives the transaction data from the application
+- passes the transaction data to the connected wallet for signing
+- converts the EVM signature to the Cosmos SDK compatible format
+- broadcasts the transaction to the network
+- returns the transaction results to the application
 
-But for others, let's break down each step in more detail. For the sake of example, let's say you're trying to send 1 INIT to another address on Initia. using Rabby.
+But for others, let's break down each step in more detail. For the sake of example, let's say you're trying to send 1 INIT to another address on Initia.
 
 ### 1. Transaction Request
 
 When a user initiates the token transfer transaction on an application, the app sends the necessary transaction details to the Widget using the [`requestTx`](https://github.com/initia-labs/wallet/blob/develop/widget/src/actions/tx.ts#L58) function. This includes the transaction payload and other options like chain ID and gas configurations.
 
-**Example Transaction Payload:**
-
-For our transaction, the payload will look similar to below:
-
-```json
-[
-   {
-      "typeUrl":"/cosmos.bank.v1beta1.MsgSend",
-      "value":{
-         "fromAddress":"init1zghrz6z3a6lg3q246m9xes7w79r8wjdcfu58ev",
-         "toAddress":"init1zghrz6z3a6lg3q246m9xes7w79r8wjdcfu58ev",
-         "amount":[
-            {
-               "denom":"uinit",
-               "amount":"1000000"
-            }
-         ]
-      }
-   }
-]
-```
-
 ### 2. Signer Setup
 
 Inside `requestTx`, the Widget first sets up the signer by validating the transaction data and ensuring the specified chain is added. It also verifies that a wallet is connected and an authenticated signer account is available.
 
-This signer class defines the specific logic of how to sign transactions for each wallet type, and is the main way in which the Widget accomplishes the remaining step. For this example, we wil be using the [EthereumSigner](https://github.com/initia-labs/wallet/blob/develop/widget/src/signers/ethereum/EthereumSigner.ts#L15) variant.
+This signer class is extremely important. It defines the specific logic of how to sign transactions for each wallet type, and is the main way in which the Widget accomplishes the remaining step. For this example, we wil be using the [EthereumSigner](https://github.com/initia-labs/wallet/blob/develop/widget/src/signers/ethereum/EthereumSigner.ts#L15) variant, meant for EVM wallets.
 
 ### 3. Transaction Handling
 
@@ -188,7 +166,7 @@ async signTx({ messages, memo = "" }: TxBodyValue, fee: StdFee): Promise<TxRaw> 
 }
 ```
   
-In the last line of the above code snippet, the `signDoc` option is passed into [`signAmino`](https://github.com/initia-labs/wallet/blob/develop/widget/src/signers/ethereum/EthereumOfflineSigner.ts#L43) for signing. This step is where the magic begins. The [`personalSign`](https://github.com/initia-labs/wallet/blob/develop/widget/src/signers/ethereum/EthereumUtils.ts#L22) function inside `signAmino` contains a line that triggers the EVM wallet's `signMessage` function. When that line is reached, the Widget sends a request to the wallet to prompt the user to sign a message that contains the transaction data.
+In the last line of the above snippet, the `signDoc` option is passed into [`signAmino`](https://github.com/initia-labs/wallet/blob/develop/widget/src/signers/ethereum/EthereumOfflineSigner.ts#L43) for signing. This is where the magic begins. The [`personalSign`](https://github.com/initia-labs/wallet/blob/develop/widget/src/signers/ethereum/EthereumUtils.ts#L22) function inside `signAmino` contains a line that triggers the EVM wallet's `signMessage` function. When that line is reached, the Widget sends a request to the wallet to prompt the user to sign a message that contains the transaction data.
 
 ```ts
 async personalSign(message: string | Uint8Array): Promise<string> {
@@ -204,7 +182,7 @@ async personalSign(message: string | Uint8Array): Promise<string> {
 }
 ```
 
-However, as EVM signature format is incompatible with Cosmos SDK transactions, the signature returned from the wallet must be converted. The code below shows the conversion process.
+However, EVM signature format is incompatible with Cosmos SDK (and by extension Initia) transactions by default. So, for the Widget to be able to use the signature to build the complete transaction, the signature must first be converted. The snippet below shows the conversion process.
 
 ```ts
 private async sign(signDoc: StdSignDoc): Promise<StdSignature> {
