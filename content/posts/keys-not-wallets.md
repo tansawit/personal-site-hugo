@@ -8,7 +8,7 @@ readTime: true
 showTags: false
 ---
 
-When designing the user experience for Initia, one of the key areas of discussion is how users use and interact with their wallets and apps. How do we offer a native, smooth experience for users while ensuring that existing blockchain users don't need to add yet another wallet to their already bloated collection? This article explores our solution: the Initia Wallet Widget.
+When designing the user experience for Initia, one of our key areas of discussion is how users use and interact with their wallets and apps. How do we offer a native, smooth experience for users while ensuring that existing blockchain users don't need to add yet another wallet to their already bloated collection? This article explores our solution: the [Initia Wallet Widget](https://github.com/initia-labs/wallet).
 
 ## The Problem With Wallets
 
@@ -17,31 +17,23 @@ You see, blockchain wallets have a problem. Their original purpose is twofold:
 1. be a place to store and manage your accounts and keys
 2. be an interface for users to use their keys to interact with the blockchain
 
-However, as the wallet landscape and blockchain ecosystem have grown, these same wallets have started to become a bottleneck and a friction point. Similar to how the blockchains themselves have fragmented, so have the surrounding tools, including wallets.
-
-In practice, this fragmentation occurs both within and across ecosystems. However, this article will focus on the fragmentation that occurs when crossing ecosystems.
+However, as the wallet landscape and blockchain ecosystem have grown, these same wallets have started to become a bottleneck and a friction point. Similar to how the blockchains themselves have fragmented, so have the surrounding tools, including wallets. And while this fragmentation occurs both within and across ecosystems, this article will focus on the fragmentation that occurs when crossing ecosystems.
 
 ### Exploring Fragmentation
 
-**We as an industry have normalized the idea of having a new wallet for each new ecosystem or tech stack.** While there are undoubtedly good reasons for this, such as offering a tailored user experience or adding and supporting specific niche features, a significant part is also self-imposed limitations. See, wallets have gone from simply being key management tools to full-fledged applications on their own, with feature offerings such as:
+The problem itself is simple. **We as an industry have normalized the idea of having a new wallet for each new ecosystem or tech stack.** While there are undoubtedly good reasons for this, such as offering a tailored user experience or adding and supporting specific niche features, a significant part is also self-imposed limitations.
 
-- direct transaction broadcasting through the wallet
-- asset and portfolio management
-- on-chain functionalities such as swaps, staking, and more
+See, wallets have gone from being simple key management tools to full-fledged applications on their own, with feature offerings such as asset and portfolio management, on-chain functionalities such as swaps, staking, and more. Understandably, part of this is the consequences of wallets trying and needing to differentiate themselves.
 
-Again this is not necessarily bad! But all of these features differs among chains. How you send transactions and queries user balances differs significantly between say EVM, Solana, and Cosmos, not to mention more niche chains. In some cases, the user flows for each also differs. Supporting these features for all ecosystems in a single wallet becomes an undetaking of brobdingnagian proportions, if feasible. Thus, when interacting across chains, users need to choose and further switch between numerous wallet options:
-
-- **EVM**: MetaMask, Rabby, Uniswap, etc.
-- **Cosmos**: Keplr, Cosmostation, Leap, etc.
-- **Solana**: Phantom, Backpack, Solflare etc.
+Again this is not necessarily bad! But most of these extra features differs among chains. How you send transactions and queries user balances changes significantly between say EVM, Solana, and Cosmos, not to mention more niche chains. In some cases, the user flows for each also differs. Supporting these features for all ecosystems in a single wallet becomes an undetaking of brobdingnagian proportions, if at all feasible. Thus, when interacting across chains, users need to choose and further switch between numerous wallet options:
 
 ![Web3 Wallet Landscape](/images/initia-wallet-widget-wallet-landscape.png)
 
-Your previously universal private keys are now restricted, imposed, and locked down by its container. An EVM user wanting to interact with Cosmos with the same key must find and install a new wallet, set up their mnemonic, and switch between the two frequently.
+Your previously universal private keys are now restricted, imposed, and locked down by its own container. An EVM user wanting to interact with Cosmos with the same key must find and install a new wallet, set up their mnemonic, and switch between the two frequently.
 
-This results in a suboptimal UX. But further than that, the need for multiple wallets also increases the potential risks for the user. They need to worry about using the correct wallet extension link, inputting the private key correctly and securely, and more. All this needs to change. And, with Initia, we have the chance to do just that.
+This clearly results in a suboptimal UX. But further than that, the need for multiple wallets also increases the potential risks for the user. They need to worry about using the correct wallet extension link, inputting the private key correctly and securely, and more
 
-When building the wallet experience for Initia, our approach is simple; **"keys, not wallets."** In short:
+All this needs to change. And, with Initia, we have the chance to do just that. Our approach to doing so is simple; **"keys, not wallets."** In short:
 
 1. **wallets as key managers**: treat wallets as what they originally meant to be, as signing devices
 2. **make wallets universal (again)**: allow users to use their existing wallets to interact with Initia
@@ -54,7 +46,7 @@ To achieve this, we've designed the [Initia Wallet Widget](https://github.com/in
 
 At its core, the key functions of the Wallet Widget are simple:
 
-1. Act as an intermediary between a dApp and the user's wallet, allowing users and apps to utilize existing wallets
+1. Act as an intermediary between a dApp and the user's wallet, allowing users and apps to utilize wallets they already have
 2. Offload all the conventional functionality and complexity of signing and broadcasting transactions from the wallet to the Widget
 
 This approach offers several benefits:
@@ -63,9 +55,9 @@ This approach offers several benefits:
 - Provides a consistent user experience across different wallets
 - Enhances security by reducing the need for users to manage multiple wallets
 
-Instead of having wallets directly interact with a dApp, the Wallet Widget acts as an intermediary layer between them. This means each app doesn't have to implement and support every major wallet or perform the necessary conversion for different wallets, VMs, signatures, and transaction types. All of this is abstracted away and handled by the Widget. The application can then solely focus on what's most important: building out core functionalities and experiences for the user, with the rest handled for them.
+Instead of having wallets directly interact with a dApp, the Wallet Widget acts as an intermediary layer between them. This means each app doesn't have to implement and support every major wallet or perform the necessary conversion for different wallets, VMs, signatures, and transaction types. All of this is instead abstracted away and handled by the Widget. The application can then solely focus on what's most important: building out core functionalities and experiences for the user, with the rest handled for them.
 
-On the user side, the Wallet Widget allows users to interact with all applications on Initia with the wallet that they already have. No going to the Chrome Store and installing a new wallet, no security risks of re-importing private keys, no cluttered and overloaded browser sidebars. **The same wallet you already have, but for an entirely new ecosystem of apps.** Let's explore how this works in more detail.
+On the user side, the Wallet Widget allows users to interact with all applications on Initia with the wallet that they already use. No going to the Chrome Store and installing a new wallet, no security risks of re-importing private keys, no cluttered and overloaded browser sidebars. **The same wallet you already have, but for an entirely new ecosystem of apps.** Let's explore how this works in more detail.
 
 ### Painting a Picture
 
@@ -86,13 +78,13 @@ You'd go to the "*Stake*" page, select "*INIT*" as the token, enter "*1*" as the
 But if you look closely, you might notice notice two things:
 
 - **the wallet is asking you to only sign a message**, not actually broadcast the transaction
-- **you've never actually added the Initia network** or switched to it on your wallet
+- **you've never actually needed to add the Initia network** or switch to it on your wallet
 
 How is this possible?
 
 ### The Secret Sauce
 
-As mentioned before, the Widget is using the connected wallet solely as a signing device. It is offloading the function of broadcasting the transaction from the wallet to itself. And since the private key you're using to sign the message is the same across all chains, the network the wallet is connected to doesn't matter.
+As mentioned before, the Widget is using the connected wallet solely as a signing device. It is offloading the function of broadcasting the transaction from the wallet to itself. And since the private key you're using to sign the message is the same across all chains, the network the wallet is currently connected to doesn't matter.
 
 The Widget handles all the tasks necessary to make that possible. But what are these tasks?
 

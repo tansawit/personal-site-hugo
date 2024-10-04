@@ -14,7 +14,7 @@ tag = 'tags'
 description = "A smol blog."
 
 # Appearance settings
-theme = 'auto'
+theme = 'light'
 colorPalette = 'default'
 hideHeader = false
 
@@ -75,7 +75,7 @@ url = "/posts"
 # Syntax highligth on code blocks
 [markup]
 [markup.highlight]
-style = 'github-dark'
+style = 'github'
 
 # Deploy settings
 
