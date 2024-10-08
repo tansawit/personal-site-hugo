@@ -8,30 +8,30 @@ readTime: true
 showTags: false
 ---
 
-When designing the user experience for Initia, one of our key areas of discussion is how users use and interact with their wallets and apps. How do we offer a native, smooth experience for users while ensuring that existing blockchain users don't need to add yet another wallet to their already bloated collection? This article explores our solution: the [Initia Wallet Widget](https://github.com/initia-labs/wallet).
+Blockchain wallets have a problem. In a few short years, they have gone from being a simple tool to allow you to access easily your assets to becoming a massive friction point for a smoother on-chain experience for users and developers alike.
+
+As wallets become more ecosystem-specific and niche, users navigating multiple ecosystems need to install and switch between multiple wallets, and developers looking to onboard users from multiple chains need to spend time and resources supporting multiple wallet types.
 
 ## The Problem With Wallets
 
-You see, blockchain wallets have a problem. Their original purpose is twofold:
+You see, the wallet's original purpose is twofold:
 
 1. be a place to store and manage your accounts and keys
 2. be an interface for users to use their keys to interact with the blockchain
 
-However, as the wallet landscape and blockchain ecosystem have grown, these same wallets have started to become a bottleneck and a friction point. Similar to how the blockchains themselves have fragmented, so have the surrounding tools, including wallets. And while this fragmentation occurs both within and across ecosystems, this article will focus on the fragmentation that occurs when crossing ecosystems.
+However, as the wallet landscape and blockchain ecosystem have grown, these same wallets have started to become a bottleneck and a friction point. Similar to how the blockchains themselves have fragmented, so have the surrounding tools, including wallets.
 
 ### Exploring Fragmentation
 
-The problem itself is simple. **We as an industry have normalized the idea of having a new wallet for each new ecosystem or tech stack.** While there are undoubtedly good reasons for this, such as offering a tailored user experience or adding and supporting specific niche features, a significant part is also self-imposed limitations.
+The problem itself is simple. **We as an industry have normalized the idea of having a new wallet for each new ecosystem or tech stack.** While there are definitely good reasons for this, such as offering a tailored user experience or adding and supporting chain-specific features, a significant part is also self-imposed limitations.
 
-See, wallets have gone from being simple key management tools to full-fledged applications on their own, with feature offerings such as asset and portfolio management, on-chain functionalities such as swaps, staking, and more. Understandably, part of this is the consequences of wallets trying and needing to differentiate themselves.
+See, wallets have gone from being simple key management tools to full-fledged applications on their own, with features such as asset and portfolio management, swapping tokens, staking, and more. Understandably, part of this is the consequences of wallets trying and needing to differentiate themselves.
 
-Again this is not necessarily bad! But most of these extra features differs among chains. How you send transactions and queries user balances changes significantly between say EVM, Solana, and Cosmos, not to mention more niche chains. In some cases, the user flows for each also differs. Supporting these features for all ecosystems in a single wallet becomes an undetaking of brobdingnagian proportions, if at all feasible. Thus, when interacting across chains, users need to choose and further switch between numerous wallet options:
+Again this is not necessarily bad! But most of these extra features differs among chains. How you send transactions and queries user balances changes significantly between say EVM, Solana, and Cosmos, not to mention more niche chains. Supporting these features for all ecosystems in a single wallet then becomes an undertaking of brobdingnagian proportions, if at all feasible. This leads to most wallets being highly specialized to a single ecosystem or a small set of chains. Users wanting to interact with multiple chains need to find, install, and switch between numerous wallet options.
 
 ![Web3 Wallet Landscape](/images/initia-wallet-widget-wallet-landscape.png)
 
-Your previously universal private keys are now restricted, imposed, and locked down by its own container. An EVM user wanting to interact with Cosmos with the same key must find and install a new wallet, set up their mnemonic, and switch between the two frequently.
-
-This clearly results in a suboptimal UX. But further than that, the need for multiple wallets also increases the potential risks for the user. They need to worry about using the correct wallet extension link, inputting the private key correctly and securely, and more
+Your previously universal private keys are now restricted, imposed, and locked down by its own container. This clearly results in a suboptimal UX. But further than that, the need for multiple wallets also creates additional risks for the user. They need to worry about clicking on the correct wallet extension link, inputting the private key securely, and more.
 
 All this needs to change. And, with Initia, we have the chance to do just that. Our approach to doing so is simple; **"keys, not wallets."** In short:
 
